@@ -25,7 +25,7 @@ export type TCareWoker = {
     email: string;
     contactNo: string;
     emergencyContactNo?: string;
-    bloogGroup?: TBloodGroup;
+    bloodGroup?: TBloodGroup;
     address?: string;
     profileImg?: string;
     isDeleted: boolean;

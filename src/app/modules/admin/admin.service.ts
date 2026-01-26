@@ -25,7 +25,7 @@ const getAllAdminsFromDB = async ( query: Record<string, unknown> ) => {
 };
 
 const getSingleAdminFromDB = async ( id: string ) => {
-    const result = await Admin.findById( { _id: id } );
+    const result = await Admin.findById( { _id: id } )
     return result;
 };
 
