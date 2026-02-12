@@ -27,7 +27,7 @@ router.patch(
 
 router.delete(
     '/:careWorkerId',
-    auth( USER_ROLE.superAdmin ),
+    auth( USER_ROLE.superAdmin, USER_ROLE.admin ),
     CareWorkerControllers.updateCareWorker,
 );
 

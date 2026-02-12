@@ -1,4 +1,4 @@
-import { TBloodGroup, TGender } from "./careWoker.interface";
+import { TBloodGroup, TCareWorkerDesignation, TGender } from "./careWoker.interface";
 
 
 export const Gender: TGender[] = [ 'male', 'female', 'other' ];
@@ -13,6 +13,16 @@ export const BloodGroup: TBloodGroup[] = [
     'O+',
     'O-',
 ];
+
+export const CareWorkerDesignation: TCareWorkerDesignation[] = [
+    'CARE_ASSISTANT',
+    'SENIOR_CARE_ASSISTANT',
+    'SUPPORT_WORKER',
+    'NURSE',
+    'TEAM_LEADER',
+    'DEPUTY_MANAGER',
+];
+
 
 export const careWokerSearchableFields = [
     'email',

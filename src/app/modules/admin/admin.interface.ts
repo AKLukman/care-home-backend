@@ -17,6 +17,14 @@ export type TUserName = {
     lastName: string;
 };
 
+export type TAddress = {
+    address1: string
+    town: string
+    county: string
+    postcode: string
+    country: "UK"
+}
+
 export type TAdmin = {
     user: Types.ObjectId;
     name: TUserName;
@@ -26,7 +34,7 @@ export type TAdmin = {
     contactNo: string;
     emergencyContactNo?: string;
     bloodGroup?: TBloodGroup;
-    address?: string;
+    address: TAddress;
     profileImg?: string;
     isDeleted: boolean;
 };

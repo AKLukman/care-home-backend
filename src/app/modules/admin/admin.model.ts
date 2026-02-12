@@ -1,6 +1,6 @@
-import { Query, Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { BloodGroup, Gender } from './admin.constant';
-import { AdminModel, TAdmin, TUserName } from './admin.interface';
+import { AdminModel, TAddress, TAdmin, TUserName } from './admin.interface';
 
 
 const userNameSchema = new Schema<TUserName>( {
@@ -21,6 +21,35 @@ const userNameSchema = new Schema<TUserName>( {
         maxlength: [ 20, 'Name can not be more than 20 characters' ],
     },
 } );
+
+const adminAddressSchema = new Schema<TAddress>( {
+    address1: {
+        type: String,
+        required: [ true, "Street address is required" ],
+        trim: true,
+        maxlength: [ 80, 'Street address can not be more than 80 characters' ],
+
+    },
+    town: {
+        type: String,
+        required: [ true, "Town name is required" ],
+        trim: true,
+        maxlength: [ 80, 'Town name can not be more than 80 characters' ],
+    },
+    county: {
+        type: String,
+        required: [ true, "County name is required" ],
+        trim: true,
+        maxlength: [ 80, 'County name can not be more than 80 characters' ],
+    },
+
+    postcode: {
+        type: String,
+        required: [ true, "Postcode is required" ],
+        trim: true,
+        maxlength: [ 10, 'Postcode can not be more than 80 characters' ],
+    }
+} )
 
 const adminSchema = new Schema<TAdmin, AdminModel>(
     {
@@ -53,7 +82,6 @@ const adminSchema = new Schema<TAdmin, AdminModel>(
         contactNo: { type: String, required: [ true, 'Contact number is required' ] },
         emergencyContactNo: {
             type: String,
-            required: [ true, 'Emergency contact number is required' ],
         },
         bloodGroup: {
             type: String,
@@ -64,7 +92,7 @@ const adminSchema = new Schema<TAdmin, AdminModel>(
         },
 
         address: {
-            type: String,
+            type: adminAddressSchema,
         },
         profileImg: { type: String, default: '' },
         isDeleted: {

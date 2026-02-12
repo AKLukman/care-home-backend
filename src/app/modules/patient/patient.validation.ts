@@ -18,25 +18,25 @@ const patientNameValidationSchema = z.object( {
         .max( 20 ),
 } );
 const patientAddressValidationSchema = z.object( {
-    line1: z
+    address1: z
         .string( { error: 'Street address is required' } )
         .trim()
         .max( 80 ),
 
-    line2: z
-        .string()
+    town: z
+        .string( { error: 'Town is required' } )
         .trim()
         .optional(),
 
-    city: z
-        .string( { error: 'City is required' } )
+    county: z
+        .string( { error: 'County is required' } )
         .trim()
         .max( 80 ),
 
     country: z
-        .string( { error: 'County is required' } )
+        .string()
         .trim()
-        .max( 80 ),
+        .max( 80 ).optional(),
 
     postcode: z
         .string( { error: 'Postcode is required' } )
@@ -81,17 +81,17 @@ const updatePatientNameValidationSchema = z.object( {
 } );
 
 const updatePatientAddressValidationSchema = z.object( {
-    line1: z
+    address1: z
         .string()
         .trim()
         .max( 80 ).optional(),
 
-    line2: z
+    town: z
         .string()
         .trim()
         .optional(),
 
-    city: z
+    county: z
         .string()
         .trim()
         .max( 80 ).optional(),

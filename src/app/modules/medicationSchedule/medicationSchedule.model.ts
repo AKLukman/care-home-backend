@@ -11,9 +11,9 @@ const doseSchema = new Schema(
             required: true,
         },
         dose: {
-            type: Number,
+            type: String,
             required: true,
-            min: 0,
+            min: 1,
         },
     },
     { _id: false }

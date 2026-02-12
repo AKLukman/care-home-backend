@@ -8,7 +8,7 @@ export const createMedicationScheduleSchema = z.object( {
         doses: z.array(
             z.object( {
                 time: z.enum( MedicationTime ),
-                dose: z.number().min( 0 ),
+                dose: z.string().min( 0 ),
             } )
         ),
 
@@ -24,7 +24,7 @@ export const updateMedicationScheduleSchema = z.object( {
         doses: z.array(
             z.object( {
                 time: z.enum( MedicationTime ),
-                dose: z.number().min( 0 ),
+                dose: z.string().min( 0 ),
             } )
         ).optional(),
 

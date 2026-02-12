@@ -24,28 +24,28 @@ const patientNameSchema = new Schema<TPatientName>( {
 } );
 
 const patientAddressSchema = new Schema<TAddress>( {
-    line1: {
+    address1: {
         type: String,
         required: [ true, "Street address is required" ],
         trim: true,
         maxlength: [ 80, 'Street address can not be more than 80 characters' ],
 
     },
-    line2: {
+
+    town: {
         type: String,
-        trim: true
-    },
-    city: {
-        type: String,
-        required: [ true, "City name is required" ],
+        required: [ true, "Town name is required" ],
         trim: true,
-        maxlength: [ 80, 'City name can not be more than 80 characters' ],
+        maxlength: [ 80, 'Town name can not be more than 80 characters' ],
     },
-    country: {
+    county: {
         type: String,
         required: [ true, "County name is required" ],
         trim: true,
         maxlength: [ 80, 'County name can not be more than 80 characters' ],
+    },
+    country: {
+        type: String,
     },
     postcode: {
         type: String,

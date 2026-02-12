@@ -43,8 +43,8 @@ const getMedicationSchedules = async ( query: Record<string, unknown> ) => {
 
 };
 
-const getSingleMedicationSchedule = async ( id: string ) => {
-    const schedule = await MedicationSchedule.findById( id )
+const getMedicationScheduleByPatient = async ( id: string ) => {
+    const schedule = await MedicationSchedule.find( { patient: id } )
         .populate( 'patient' )
         .populate( 'medication' )
         .populate( 'createdBy' )
@@ -86,7 +86,7 @@ const deleteMedicationSchedule = async ( id: string ) => {
 export const MedicationScheduleService = {
     createMedicationSchedule,
     getMedicationSchedules,
-    getSingleMedicationSchedule,
+    getMedicationScheduleByPatient,
     updateMedicationSchedule,
     deleteMedicationSchedule,
 };

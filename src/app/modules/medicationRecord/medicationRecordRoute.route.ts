@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { USER_ROLE } from "../user/user.constant";
 import auth from "../../middlewares/auth";
-import { MedicationRecordController } from "./medicationRecord.controller";
 import validateRequest from "../../middlewares/validateRequest";
 import { updateMedicationRecordSchema } from "./medicationRecord.validation";
+import { MedicationRecordController } from "./medicationRecord.controller";
 
 const router = Router();
 

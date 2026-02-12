@@ -1,6 +1,6 @@
 import { Query, Schema, model } from 'mongoose';
-import { CareWokerModel, TCareWoker, TCareWokerName } from './careWoker.interface';
-import { BloodGroup, Gender } from './careWorker.constant';
+import { CareWokerModel, TAddress, TCareWoker, TCareWokerName } from './careWoker.interface';
+import { BloodGroup, CareWorkerDesignation, Gender } from './careWorker.constant';
 
 
 
@@ -24,6 +24,35 @@ const userNameSchema = new Schema<TCareWokerName>( {
     },
 } );
 
+const careWorkerAddressSchema = new Schema<TAddress>( {
+    address1: {
+        type: String,
+        required: [ true, "Street address is required" ],
+        trim: true,
+        maxlength: [ 80, 'Street address can not be more than 80 characters' ],
+
+    },
+
+    town: {
+        type: String,
+        required: [ true, "Town name is required" ],
+        trim: true,
+        maxlength: [ 80, 'Town name can not be more than 80 characters' ],
+    },
+    county: {
+        type: String,
+        required: [ true, "County name is required" ],
+        trim: true,
+        maxlength: [ 80, 'County name can not be more than 80 characters' ],
+    },
+    postcode: {
+        type: String,
+        required: [ true, "Postcode is required" ],
+        trim: true,
+        maxlength: [ 10, 'Postcode can not be more than 80 characters' ],
+    }
+} )
+
 const careWokerSchema = new Schema<TCareWoker, CareWokerModel>(
     {
 
@@ -46,6 +75,14 @@ const careWokerSchema = new Schema<TCareWoker, CareWokerModel>(
             },
             required: [ true, 'Gender is required' ],
         },
+        designation: {
+            type: String,
+            enum: {
+                values: CareWorkerDesignation,
+                message: '{VALUE} is not a valid gender',
+            },
+            required: [ true, 'Gender is required' ],
+        },
         dateOfBirth: { type: Date },
         email: {
             type: String,
@@ -55,7 +92,7 @@ const careWokerSchema = new Schema<TCareWoker, CareWokerModel>(
         contactNo: { type: String, required: [ true, 'Contact number is required' ] },
         emergencyContactNo: {
             type: String,
-            required: [ true, 'Emergency contact number is required' ],
+
         },
         bloodGroup: {
             type: String,
@@ -66,7 +103,7 @@ const careWokerSchema = new Schema<TCareWoker, CareWokerModel>(
         },
 
         address: {
-            type: String,
+            type: careWorkerAddressSchema,
         },
         profileImg: { type: String, default: '' },
         isDeleted: {

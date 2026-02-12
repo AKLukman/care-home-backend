@@ -1,35 +1,39 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { MedicationRecordService } from './medicationService.service';
+import { MedicationRecordService } from './medicationRecordService.service';
+
+
 
 
 const getTodayMedicationRecords = catchAsync( async ( req, res ) => {
-    const careWorkerEmaail = req.user.email;
-    const today = new Date();
-    today.setHours( 0, 0, 0, 0 );
+    // const { patientId } = req.params;
 
     const result =
         await MedicationRecordService.getTodayRecordsForCareWorker(
-            today
+            // patientId as string,
+            req.query
         );
 
     sendResponse( res, {
         statusCode: httpStatus.OK,
         success: true,
         message: 'Today medication records retrieved',
-        data: result,
+        data: result.result,
+        meta: result.meta
     } );
 } );
 
 const updateMedicationStatus = catchAsync( async ( req, res ) => {
     const { id } = req.params;
-    const careWorkerEmaail = req.user.email;
+
+
+    const updatedBy = req.user.email;
 
     const result =
         await MedicationRecordService.updateMedicationStatus( id as string, {
             ...req.body,
-            careWorkerEmaail,
+            updatedBy,
         } );
 
     sendResponse( res, {

@@ -21,6 +21,7 @@ router.get( '/',
     MedicationControllers.getAllMedications
 );
 
+
 router.patch(
     '/:id',
     auth( USER_ROLE.admin, USER_ROLE.superAdmin ),

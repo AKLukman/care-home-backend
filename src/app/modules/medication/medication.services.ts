@@ -61,6 +61,8 @@ const deleteMedicationFromDB = async ( id: string ) => {
     return result;
 };
 
+
+
 export const MedicationServices = {
     createMedicationIntoDB,
     getAllMedicationsFromDB,

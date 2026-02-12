@@ -19,9 +19,8 @@ export type TPatientName = {
 };
 
 export type TAddress = {
-    line1: string
-    line2?: string
-    city: string
+    address1: string
+    town: string
     county: string
     postcode: string
     country: "UK"
@@ -33,7 +32,7 @@ export type TPatient = {
     gender: TGender;
     bloodGroup?: TBloodGroup;
     dateOfBirth: Date;
-    allergies: string[],
+    allergies?: string[],
     address: TAddress;
     contactNo: string;
     emergencyContactNo?: string;

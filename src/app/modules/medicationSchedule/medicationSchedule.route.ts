@@ -24,7 +24,7 @@ router.get(
 router.get(
     '/:id',
     auth( USER_ROLE.admin, USER_ROLE.superAdmin ),
-    MedicationScheduleController.getSingleMedicationSchedule
+    MedicationScheduleController.getMedicationScheduleByPatient
 );
 
 router.patch(

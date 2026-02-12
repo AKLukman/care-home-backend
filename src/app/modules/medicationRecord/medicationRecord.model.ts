@@ -43,7 +43,12 @@ const medicationRecordSchema = new Schema<TMedicationRecord>(
 
         administeredBy: {
             type: Schema.Types.ObjectId,
-            ref: 'CareWorker',
+            refPath: "administeredByModel"
+        },
+        administeredByModel: {
+            type: String,
+            // required: true,
+            enum: [ "Admin", "CareWorker" ]
         },
         administeredAt: {
             type: Date,

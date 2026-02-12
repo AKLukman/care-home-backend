@@ -7,13 +7,15 @@ export type TMedicationRecord = {
     medication: Types.ObjectId;
     schedule: Types.ObjectId;
 
-    date: Date; // important (per day)
+    date: Date;
     time: TMedicationTime;
 
     dose: number;
     status: TMedicationStatus;
 
-    administeredBy?: Types.ObjectId; // CareWorker
+    administeredBy: Types.ObjectId;
+    administeredByModel: "Admin" | "CareWorker";
+
     administeredAt?: Date;
 
     note?: string;

@@ -29,11 +29,12 @@ const getMedicationSchedules = catchAsync( async ( req, res ) => {
     } );
 } );
 
-const getSingleMedicationSchedule = catchAsync( async ( req, res ) => {
+const getMedicationScheduleByPatient = catchAsync( async ( req, res ) => {
     const { id } = req.params;
 
+
     const result =
-        await MedicationScheduleService.getSingleMedicationSchedule( id as string );
+        await MedicationScheduleService.getMedicationScheduleByPatient( id as string );
 
     sendResponse( res, {
         statusCode: httpStatus.OK,
@@ -73,7 +74,7 @@ const deleteMedicationSchedule = catchAsync( async ( req, res ) => {
 export const MedicationScheduleController = {
     createMedicationSchedule,
     getMedicationSchedules,
-    getSingleMedicationSchedule,
+    getMedicationScheduleByPatient,
     updateMedicationSchedule,
     deleteMedicationSchedule,
 };

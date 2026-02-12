@@ -8,7 +8,7 @@ import { User } from "../user/user.model";
 import httpStatus from 'http-status'
 
 const getAllCareWorkers = async ( query: Record<string, unknown> ) => {
-    const careWorkerQuery = new QueryBuilder( CareWoker.find(), query )
+    const careWorkerQuery = new QueryBuilder( CareWoker.find().populate( "user" ), query )
         .search( careWokerSearchableFields )
         .filter()
         .sort()

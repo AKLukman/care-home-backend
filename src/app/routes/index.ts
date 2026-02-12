@@ -6,7 +6,8 @@ import { CareWorkerRoutes } from "../modules/careWorker/careWorker.route";
 import { PatientRoutes } from "../modules/patient/patient.route";
 import { MedicationRoutes } from "../modules/medication/mediction.route";
 import { MedicationScheduleRoutes } from "../modules/medicationSchedule/medicationSchedule.route";
-import { MedicationRecordRoutes } from "../modules/medicationRecord/medicationRoute.route";
+import { MedicationRecordRoutes } from "../modules/medicationRecord/medicationRecordRoute.route";
+
 
 const router = Router();
 

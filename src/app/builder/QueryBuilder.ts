@@ -27,18 +27,24 @@ class QueryBuilder<T> {
         return this;
     }
 
-    filter() {
-        const queryObj = { ...this.query }; // copy
-
-        // Filtering
+    filter( filterableFields: string[] = [] ) {
+        const queryObj = { ...this.query };
         const excludeFields = [ 'searchTerm', 'sort', 'limit', 'page', 'fields' ];
 
         excludeFields.forEach( ( el ) => delete queryObj[ el ] );
 
-        this.modelQuery = this.modelQuery.find( queryObj );
+        if ( filterableFields.length ) {
+            Object.keys( queryObj ).forEach( ( key ) => {
+                if ( !filterableFields.includes( key ) ) {
+                    delete queryObj[ key ];
+                }
+            } );
+        }
 
+        this.modelQuery = this.modelQuery.find( queryObj );
         return this;
     }
+
 
     sort() {
         const sort =
@@ -50,7 +56,7 @@ class QueryBuilder<T> {
 
     paginate() {
         const page = Number( this?.query?.page ) || 1;
-        const limit = Number( this?.query?.limit ) || 10;
+        const limit = Number( this?.query?.limit ) || 20;
         const skip = ( page - 1 ) * limit;
 
         this.modelQuery = this.modelQuery.skip( skip ).limit( limit );

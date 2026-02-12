@@ -6,6 +6,12 @@ const createUserNameValidationSchema = z.object( {
     middleName: z.string().max( 20 ),
     lastName: z.string().max( 20 ),
 } );
+const createAddressValidationSchema = z.object( {
+    address1: z.string().min( 1 ).max( 80 ),
+    town: z.string().max( 80 ),
+    county: z.string().max( 80 ),
+    postcode: z.string().max( 10 ),
+} );
 
 export const createAdminValidationSchema = z.object( {
     body: z.object( {
@@ -18,7 +24,7 @@ export const createAdminValidationSchema = z.object( {
             contactNo: z.string(),
             emergencyContactNo: z.string(),
             bloogGroup: z.enum( [ ...BloodGroup ] as [ string, ...string[] ] ).optional(),
-            address: z.string().optional(),
+            address: createAddressValidationSchema,
             // profileImg: z.string(),
         } ),
     } ),
@@ -28,6 +34,13 @@ const updateUserNameValidationSchema = z.object( {
     firstName: z.string().min( 3 ).max( 20 ).optional(),
     middleName: z.string().min( 3 ).max( 20 ).optional(),
     lastName: z.string().min( 3 ).max( 20 ).optional(),
+} );
+
+const updateAddressValidationSchema = z.object( {
+    address1: z.string().min( 1 ).max( 80 ).optional(),
+    town: z.string().max( 80 ).optional(),
+    county: z.string().max( 80 ).optional(),
+    postcode: z.string().max( 10 ).optional(),
 } );
 
 export const updateAdminValidationSchema = z.object( {
@@ -42,6 +55,7 @@ export const updateAdminValidationSchema = z.object( {
             bloogGroup: z.enum( [ ...BloodGroup ] as [ string, ...string[] ] ).optional(),
             presentAddress: z.string().optional(),
             permanentAddress: z.string().optional(),
+            address: updateAddressValidationSchema
             // profileImg: z.string().optional(),
         } ),
     } ),
