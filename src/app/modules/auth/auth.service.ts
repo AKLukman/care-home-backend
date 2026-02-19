@@ -36,7 +36,7 @@ const loginUser = async ( payload: TLoginUser ) => {
     //checking if the password is correct
 
     if ( !( await User.isPasswordMatched( payload?.password, user?.password ) ) )
-        throw new AppError( httpStatus.FORBIDDEN, 'Password do not matched' );
+        throw new AppError( httpStatus.FORBIDDEN, 'Invalid email or password' );
 
     //create token and sent to the  client
 
@@ -194,7 +194,6 @@ const forgetPassword = async ( email: string ) => {
 
     sendEmail( user.email, resetUILink );
 
-    console.log( resetUILink );
 };
 
 const resetPassword = async (
@@ -230,7 +229,6 @@ const resetPassword = async (
     //localhost:3000?id=A-0001&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI4NTA2MTcsImV4cCI6MTcwMjg1MTIxN30.-T90nRaz8-KouKki1DkCSMAbsHyb9yDi0djZU3D6QO4
 
     if ( payload.email !== decoded.email ) {
-        console.log( payload.email, decoded.email );
         throw new AppError( httpStatus.FORBIDDEN, 'You are forbidden!' );
     }
 

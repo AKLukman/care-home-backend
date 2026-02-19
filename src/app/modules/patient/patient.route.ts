@@ -22,11 +22,11 @@ router.post( "/create-patient",
 )
 
 router.get( "/",
-    auth( USER_ROLE.superAdmin, USER_ROLE.admin ),
+    auth( USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.careWorker ),
     PatientControllers.getPatientsFromDB
 )
 router.get( "/:id",
-    auth( USER_ROLE.superAdmin, USER_ROLE.admin ),
+    auth( USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.careWorker ),
     PatientControllers.getSinglePatients
 )
 router.patch( "/:id",
