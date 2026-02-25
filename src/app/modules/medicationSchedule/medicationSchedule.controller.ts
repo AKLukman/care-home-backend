@@ -9,6 +9,7 @@ const createMedicationSchedule = catchAsync( async ( req, res ) => {
     const result =
         await MedicationScheduleService.createMedicationSchedule( req.body, adminEmail );
 
+
     sendResponse( res, {
         statusCode: httpStatus.CREATED,
         success: true,

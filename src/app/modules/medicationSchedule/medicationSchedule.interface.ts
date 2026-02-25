@@ -4,7 +4,7 @@ import { TMedicationTime } from './medicationSchedule.constant';
 
 export type TDosePerTime = {
     time: TMedicationTime;
-    dose: string;
+    dose: number;
 };
 
 export type TMedicationSchedule = {
