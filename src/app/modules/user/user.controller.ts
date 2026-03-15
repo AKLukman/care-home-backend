@@ -63,10 +63,23 @@ const changeStatus = catchAsync( async ( req, res ) => {
     } );
 } );
 
+const updateProfile = catchAsync( async ( req, res ) => {
+    const { email, role } = req.user;
+    const result = await UserServices.updateProfile( email, role, req.file );
+
+    sendResponse( res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Profile updated successfully',
+        data: result,
+    } );
+} );
+
 export const UserControllers = {
     createAdmin,
     createCareWorker,
     changeStatus,
-    getMe
+    getMe,
+    updateProfile
 
 };

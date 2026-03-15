@@ -12,15 +12,17 @@ class QueryBuilder<T> {
     }
 
     search( searchableFields: string[] ) {
-        const searchTerm = this?.query?.searchTerm;
+        const searchTerm = this?.query?.searchTerm as string;
+
         if ( searchTerm ) {
+            const searchWords = searchTerm.trim().split( /\s+/ );
+
             this.modelQuery = this.modelQuery.find( {
-                $or: searchableFields.map(
-                    ( field ) =>
-                    ( {
-                        [ field ]: { $regex: searchTerm, $options: 'i' },
-                    } ),
-                ),
+                $and: searchWords.map( ( word ) => ( {
+                    $or: searchableFields.map( ( field ) => ( {
+                        [ field ]: { $regex: word, $options: "i" },
+                    } ) ),
+                } ) ),
             } );
         }
 
@@ -56,7 +58,7 @@ class QueryBuilder<T> {
 
     paginate() {
         const page = Number( this?.query?.page ) || 1;
-        const limit = Number( this?.query?.limit ) || 20;
+        const limit = Number( this?.query?.limit ) || 10;
         const skip = ( page - 1 ) * limit;
 
         this.modelQuery = this.modelQuery.skip( skip ).limit( limit );

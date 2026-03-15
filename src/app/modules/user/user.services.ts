@@ -160,10 +160,45 @@ const changeStatus = async ( id: string, payload: { status: string } ) => {
     return result;
 };
 
+const updateProfile = async ( email: string, role: string, file: any ) => {
+    const payload: any = {
+        email
+    };
+    if ( file ) {
+        const imageName = `${ Date() }${ role }`;
+        const path = file?.path;
+        //send image to cloudinary
+        const { secure_url } = await sendImageToCloudinary( imageName, path );
+        payload.profileImg = secure_url as string;
+    }
+
+    let result = null;
+    if ( role === 'careWorker' ) {
+        result = await CareWoker.findOneAndUpdate( { email },
+            payload,
+            { new: true } );
+    }
+    if ( role === 'admin' ) {
+        result = await Admin.findOneAndUpdate( { email },
+            payload,
+            { new: true } );
+    }
+
+    if ( role === 'superAdmin' ) {
+        result = await Admin.findOneAndUpdate( { email },
+            payload,
+            { new: true } );
+    }
+
+
+    return result;
+
+}
+
 export const UserServices = {
     createAdminIntoDB,
     createCareWorkerIntoDB,
     getMe,
-    changeStatus
-
+    changeStatus,
+    updateProfile
 };

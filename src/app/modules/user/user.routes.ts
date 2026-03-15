@@ -50,4 +50,16 @@ router.get(
     ),
     UserControllers.getMe,
 );
+
+router.patch(
+    "/updateProfile",
+    auth(
+        USER_ROLE.superAdmin,
+        USER_ROLE.admin,
+        USER_ROLE.careWorker,
+    ),
+    upload.single( 'file' ),
+
+    UserControllers.updateProfile
+)
 export const UserRoutes = router
